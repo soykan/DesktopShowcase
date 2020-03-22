@@ -1,0 +1,41 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+{% if posts %}
+    {% for post in posts %}
+        <div class="card" style="width: auto;color:#2c3e50;">
+            <img src="http://{{ request.get_host }}/photos/{{ post.photo }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content|linebreaks }}</p>
+                <form method="POST" action="#">
+                    {% csrf_token %}
+                    <input type="hidden" value={{ post.id }} name="id" />
+                    {% if post.id in liked_posts %}
+                        <button type="submit" class="btn btn-primary" name="unlike" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)">Liked &#10004</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-dark" name="like">Like</button>
+                    {% endif %}
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                <span style="color:#2c3e50">{{ post.point }} Likes</span>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>Kayit yok</p>
+{% endif %}
+<hr>
+<script>
+    function mouseOver(x) {
+        x.innerHTML = "Unlike &#10060;";
+        x.className = "btn btn-dark";
+    }
+
+    function mouseOut(x) {
+        x.innerHTML = "Liked &#10004";
+        x.className = "btn btn-primary";
+    }
+</script>
+{% endblock content %}

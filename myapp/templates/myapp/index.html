@@ -1,0 +1,21 @@
+
+{% extends "myapp/base.html" %}
+{% load static %}
+{% block content %}
+<div class="jumbotron" style="background-color: #34495e;border-style: dashed;">
+    <div class="container">
+        <main role="main" class="inner cover">
+            <img src="{% static "welcome.gif" %}" class="img-fluid" width="300" height="450"/>
+            <h1 class="cover-heading">Share Your Desktop</h1>
+            <p class="lead">Share your desktop configuration files with a screenshot and vote anothers.</p>
+            {% if not_logged_on %}
+            <p class="lead">
+              <a href="/register" class="btn btn-lg btn-secondary">Register</a>
+            </p>
+            {% endif %}
+        </main>
+    </div>
+</div>
+
+{% endblock content %}
+

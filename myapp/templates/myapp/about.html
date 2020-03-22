@@ -1,0 +1,38 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron"  style="background-color: white; color:#34495e;border-style:double;">
+    <div class="container">
+        <main role="main" class="inner cover"><!--
+            <img src="{% static "about.gif" %}" class="img-fluid" width="331" height="498" />
+            <div class="card text-white bg-dark">
+                <div class="card-header">About This Website</div>
+                <div class="card-body">
+                  <p class="card-text">This website bring people together who like configuring their desktop environment and generally use UNIX-Like operating systems.
+                    People can share their screenshots and configuration files of their system also they can vote anothers. </p>
+                </div>
+            </div>
+            -->
+            <div class="row">
+                <div class="col" style="border-style:dashed;">
+                    <img src="{% static "about.gif" %}" class="img-fluid" width="331" height="498" />
+                </div>
+                <div class="col">
+                    <div style="border-style: dashed;">
+                    <hr>
+                    <h1 class="cover-heading">About</h1><hr>
+                    <p style="font-size: 16px;">
+                        This website brings people together who like configuring their desktop environment and generally use UNIX-Like operating systems.
+                        People can share their screenshots and configuration files of their system also they can vote anothers.
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+{% endblock content %}
+
+

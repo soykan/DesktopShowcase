@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>NEW POST LIST</title>
+</head>
+<body>
+    <h1>NEW POSTS</h1>
+    {% for post in post_list %}
+        {{ post.title }}<br>
+        {{ post.content }}<br>
+        {{ post.photo }} <br>
+        {{ post.point }}<br>
+        <br><br><br>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron" style="background-color: #34495e;border-style:dashed;">
+    <div class="container">
+        <main role="main" class="inner cover">
+            <h2>Create a New Account</h2>
+                <br>
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input type="password" name="password1" id="password1" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password2">Retype your password</label>
+                    <input type="password" name="password2" id="password2" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Mail Adress</label>
+                    <input type="text" name="email" id="email" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-light">Register</button> 
+            </form>
+
+            {% if different %}
+                <hr>
+                <b class="text-danger">Passwords do not match.</b>
+            {% endif %}
+
+            {% if empty %}
+                <hr>    
+                <b class="text-danger">All areas are required.</b>
+            {% endif %}
+
+            {% if username_exists %}
+                <hr>
+                <b class="text-danger">This username is already registered.</b>
+            {% endif %}
+
+            {% if email_exists %}
+                <hr>
+                <b class="text-danger">This email address is already registered.</b>
+            {% endif %}
+
+            {% if password_short %}
+                <hr>
+                <b class="text-danger">Your password must be longer then 3 characters.</b>
+            {% endif %}
+
+            {% if username_short %}
+                <hr>
+                <b class="text-danger">Your username must be longer then 2 characters.</b>
+            {% endif %}
+
+            {% if email_not_valid %}
+                <hr>
+                <b class="text-danger">Please enter a valid email address.</b>
+            {% endif %}
+        </main>
+    </div>
+</div>
+{% endblock content %}
