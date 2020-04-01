@@ -4,7 +4,7 @@ from myapp.forms import UploadFileForm
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from myapp.models import Post
-from myapp.myviews.login import Login
+from myapp.myviews.login import LoginView
 from pathlib import Path
 
 class UploadView(FormView):
@@ -60,5 +60,5 @@ class UploadView(FormView):
 
     def is_user_logged_on(self):
         context = self.get_context_data()
-        return Login.is_user_logged_on(self.request, context)
+        return LoginView.is_user_logged_on(self.request, context)
     

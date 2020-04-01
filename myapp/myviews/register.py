@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from myapp.models import User
-from .login import Login
+from .login import LoginView
 
 class Register:
     def __init__(self, request):
@@ -54,7 +54,7 @@ class Register:
 
     def register_the_new_user(self, input_data):
         self.save_to_database(input_data)
-        return Login.login_success(self.request, input_data)
+        return LoginView.login_success(self.request, input_data)
 
     def email_not_valid(self):
         self.context['email_not_valid'] = True
@@ -148,7 +148,7 @@ class Register:
         record.save()
 
     def is_user_logged_on(self):
-        return Login.is_user_logged_on(self.request, self.context)
+        return LoginView.is_user_logged_on(self.request, self.context)
     
     def redirect_to_index(self):
         return HttpResponseRedirect(reverse('index'))    
