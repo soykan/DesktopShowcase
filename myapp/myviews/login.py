@@ -6,6 +6,12 @@ from myapp.models import User
 class LoginView(TemplateView):
     template_name = 'myapp/login.html'
 
+    def get(self, request):
+        context = self.get_context_data()
+        if not self.is_user_logged_on(request, context):
+            return render(request, self.template_name, context)
+        return self.redirect_to_index()
+
     def post(self, request):
         input_data = self.get_input_data()
         if self.check_login_credentials(input_data):
@@ -17,9 +23,6 @@ class LoginView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['active_login'] = 'active'
         context['height'] = True
-        if self.is_user_logged_on(self.request, context):
-            user_id = self.request.session['user_id']
-            context['liked_posts'] = self.posts_liked_by_user(user_id)
         return context
 
     @classmethod
