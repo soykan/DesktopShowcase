@@ -120,5 +120,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/photos/'
-MEDIA_ROOT = '/home/user/Desktop/MyProject/photos/'
+MEDIA_ROOT = BASE_DIR + '/photos/'
 

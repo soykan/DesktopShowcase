@@ -1,7 +1,7 @@
 {% extends "myapp/base.html" %}
 {% block content %}
 {% if posts %}
-    {% for post in posts %}
+    {% for post in posts_per_page %}
         <div class="card" style="width: auto;color:#2c3e50;">
             <img src="http://{{ request.get_host }}/photos/{{ post.photo }}" class="card-img-top">
             <div class="card-body">
@@ -23,6 +23,23 @@
         </div>
         <hr>
     {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts_per_page.has_previous %}
+                <a href="{% url current_url %}">&laquo; first</a>
+                <a href="{% url current_url posts_per_page.previous_page_number %}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ posts_per_page.number }} of {{ posts_per_page.paginator.num_pages }}.
+            </span>
+
+            {% if posts_per_page.has_next %}
+                <a href="{% url current_url posts_per_page.next_page_number %}">next</a>
+                <a href="{% url current_url posts_per_page.paginator.num_pages %}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% else %}
     <p>Kayit yok</p>
 {% endif %}

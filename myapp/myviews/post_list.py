@@ -3,12 +3,22 @@ from django.shortcuts import HttpResponseRedirect, render, HttpResponse
 from django.urls import reverse
 from myapp.models import Post, User, LikesAndUsers
 from myapp.myviews.login import LoginView
+from django.core.paginator import Paginator
+from django.urls import resolve
 
 class PostList(TemplateView):
     template_name = 'myapp/posts.html'
     ordering_column = ''
     active_menu = ''
     page = ''
+
+    def get(self, request, page_number=1):
+        context = self.get_context_data()
+        paginator = Paginator(context['posts'], 5)
+        posts_per_page = paginator.get_page(page_number)
+        context['posts_per_page'] = posts_per_page
+        context['current_url'] = resolve(request.path_info).url_name
+        return render(request, self.template_name, context)
 
     def post(self, request):
         context = self.get_context_data()

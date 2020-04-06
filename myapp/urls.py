@@ -10,7 +10,9 @@ urlpatterns = [
     # /myapp/
     path('', IndexView.as_view(), name='index'),
     path('new/', NewPostList.as_view(), name='new'),
+    path('new/<int:page_number>/', NewPostList.as_view(), name='new'),
     path('top/', TopPostList.as_view(), name='top'),
+    path('top/<int:page_number>/', TopPostList.as_view(), name='top'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', views.logout, name='logout'),
