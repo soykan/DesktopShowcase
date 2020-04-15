@@ -23,23 +23,19 @@
         </div>
         <hr>
     {% endfor %}
-    <div class="pagination">
-        <span class="step-links">
+    <nav>
+        <ul class="pagination justify-content-center">
             {% if posts_per_page.has_previous %}
-                <a href="{% url current_url %}">&laquo; first</a>
-                <a href="{% url current_url posts_per_page.previous_page_number %}">previous</a>
+                <li class="page-item"><a class="page-link" href="{% url current_url %}">&laquo; First</a></li>
+                <li class="page-item"><a class="page-link" href="{% url current_url posts_per_page.previous_page_number %}">Previous</a></li>
             {% endif %}
-
-            <span class="current">
-                Page {{ posts_per_page.number }} of {{ posts_per_page.paginator.num_pages }}.
-            </span>
-
+            <li class="page-item"><a class="page-link" href="#">{{ posts_per_page.number }} / {{ posts_per_page.paginator.num_pages }}</a></li>
             {% if posts_per_page.has_next %}
-                <a href="{% url current_url posts_per_page.next_page_number %}">next</a>
-                <a href="{% url current_url posts_per_page.paginator.num_pages %}">last &raquo;</a>
+                <li class="page-item"><a class="page-link" href="{% url current_url posts_per_page.next_page_number %}">Next</a>
+                <li class="page-item"><a class="page-link" href="{% url current_url posts_per_page.paginator.num_pages %}">Last &raquo;</a>
             {% endif %}
-        </span>
-    </div>
+        </ul>
+    </nav>
 {% else %}
     <p>Kayit yok</p>
 {% endif %}
