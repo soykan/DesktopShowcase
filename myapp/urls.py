@@ -6,6 +6,8 @@ from myapp.views import AboutView, IndexView, TopPostList, NewPostList, UploadVi
 from django.conf import settings
 from django.conf.urls.static import static
 
+from datetime import datetime
+
 urlpatterns = [
     # /myapp/
     path('', IndexView.as_view(), name='index'),
@@ -18,4 +20,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('upload/', UploadView.as_view(), name='upload'),
     path('about/', AboutView.as_view(), name='about'),
+    path('price/', views.price, name='price')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

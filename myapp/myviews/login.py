@@ -2,7 +2,6 @@ from django.views.generic import TemplateView
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from myapp.models import User
-from captcha.fields import CaptchaField
 
 class LoginView(TemplateView):
     template_name = 'myapp/login.html'

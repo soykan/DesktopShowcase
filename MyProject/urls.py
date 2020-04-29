@@ -20,5 +20,4 @@ from myapp import views
 urlpatterns = [
     path('', include('myapp.urls')),
     path('admin/', admin.site.urls),
-    path('captcha/', include('captcha.urls')),
 ]

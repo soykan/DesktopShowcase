@@ -15,15 +15,6 @@
                     <label for="password">Password:</label>
                     <input type="password" name="password" id="password" class="form-control" />
                 </div>
-                <script src="https://www.google.com/recaptcha/api.js?render=6LcgnukUAAAAAJQS9rTL0cwX2ltxZvD_uR7W-qtt"></script>
-                <script>
-                grecaptcha.ready(function() {
-                    grecaptcha.execute('6LcgnukUAAAAAJQS9rTL0cwX2ltxZvD_uR7W-qtt', {action: 'homepage'}).then(function(token) {
-                     alert("deneme");
-                    });
-                });
-                </script>
-
                 <button type="submit" class="btn btn-light">Login</button> 
                 {% if incorrect %}
                     <hr>

@@ -5,10 +5,36 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from myapp.models import User
 from .login import LoginView
+from datetime import datetime
+import time
+import json
 
 class RegisterView(TemplateView):
     template_name = 'myapp/register.html'
+    """
+    def quirky_randomizer():
+        ms = datetime.now().strftime("%f")
+        #print("Microsecond: " + ms)
+        codes = []
+        count = 0
 
+        for i in range(0, int(len(ms)/2)):
+            val1 = ms[i]
+            val2 = ms[len(ms) - (i + 1)]
+            if i % 2 != 0:
+                c1 = val1 + val2
+            else:
+                c1 = val2 + val1
+            c21 = abs(int(val1) - int(val2))
+            c22 = abs(int(val1) + int(val2)) % 10
+            c2 = str(c21) + str(c22)
+            codes.append(c1)
+            codes.append(c2)
+            count = abs(int(codes[0]) - int(codes[len(codes) - 1])) % 3
+
+        codes = '{0}'.format(str(count) * count).join(codes)
+        return codes
+    """
     def post(self, request):
         input_data = self.get_input_data()
         context = self.get_context_data()
@@ -45,8 +71,13 @@ class RegisterView(TemplateView):
         return HttpResponseRedirect(reverse('index'))    
 
     def register_the_new_user(self, input_data):
-        self.save_to_database(input_data)
-        return LoginView.login_success(self.request, input_data)
+        self.request.session['input_data'] = input_data.toJSON()
+        
+        return HttpResponseRedirect(reverse('price'))
+        #self.save_to_database(input_data)
+        #return LoginView.login_success(self.request, input_data)
+    
+
 
     def email_not_valid(self, context):
         context['email_not_valid'] = True
@@ -132,7 +163,7 @@ class RegisterView(TemplateView):
         except ValidationError:
             return False
         
-    def save_to_database(self, input_data):
+    def save_to_database(input_data):
         username = input_data.username
         password = input_data.password1
         email = input_data.email
@@ -149,3 +180,6 @@ class RegisterView(TemplateView):
         def __str__(self):
             return 'Username: {self.username}, Password1: {self.password1}, \
                     Password2: {self.password2}, email: {self.email}'.format(self=self)
+        
+        def toJSON(self):
+            return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
