@@ -1,2 +1,2 @@
 # DesktopShowcase
-It's a simple web application platform for who people want to share their desktop configurations.
+It's a simple web application platform for people who want to share their desktop configurations.
